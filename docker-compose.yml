@@ -8,17 +8,26 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - global
+      - db
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-ppass"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
   web:
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     build:
       context: .
       dockerfile: backend.Dockerfile
     networks:
-      - global
+      - serv
+      - db
     ports:
       - "4000:4000"
 networks:
-  global:
-    name: global
+  serv:
+    name: serv
+  db:
+    name: db

@@ -10,7 +10,7 @@ router.post('/api/signup', (req, res) => {
             `http://${process.env.SERVER_LOG_HOST}:${process.env.SERVER_LOG_PORT}/signup`,
             { email: 'a@a.com', password: 'azerty', googleId: '' }
         )
-        .then((e) => console.log(e.data))
+        .then((e) => res.send(e.data))
 })
 router.post('/api/signin', (req, res) => {
     axios
@@ -18,7 +18,7 @@ router.post('/api/signin', (req, res) => {
             `http://${process.env.SERVER_LOG_HOST}:${process.env.SERVER_LOG_PORT}/signin`,
             { email: 'a@a.com', password: 'azerty' }
         )
-        .then((e) => console.log(e.data))
+        .then((e) => res.send(e.data))
 })
 
 router.get('/api/user/me', (req, res) => {
