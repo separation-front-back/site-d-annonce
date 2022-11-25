@@ -29,8 +29,12 @@ router.post('/api/user/create', (req, res) => {
         })
 })
 router.post('/api/test', (req, res) => {
-    axios.post('http://localhost:4000/signup', {email: 'a@a.com', password: 'azerty'})
-    .then(e => console.log(e.data))
+    axios
+        .post(
+            `http://${process.env.SERVER_LOG_HOST}:${process.env.SERVER_LOG_PORT}/signup`,
+            { email: 'a@a.com', password: 'azerty', googleId: '' }
+        )
+        .then((e) => console.log(e.data))
 })
 router.post('/api/user/login', (req, res) => {
     if (!req.body.username || !req.body.password) return res.status(400)

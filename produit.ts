@@ -4,6 +4,8 @@ import db from './db'
 const router = Router()
 
 router.post('/api/product/create', (req, res) => {
+    console.log(req.body)
+
     db('products')
         .insert({
             name: req.body.name,

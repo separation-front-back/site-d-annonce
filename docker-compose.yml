@@ -2,22 +2,23 @@ version: '3'
 
 services:
   db:
-    image: mysql:5.7
-    container_name: site-d-annonce-db
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: database
+    build: 
+      context: .
+      dockerfile: database.Dockerfile
     ports:
-      - "3333:3333"
-    volumes:
-      - dbdata:/var/lib/mysql
+      - "3306:3306"
+    networks:
+      - global
   web:
     depends_on:
       - db
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: backend.Dockerfile
+    networks:
+      - global
     ports:
-      - "9000:9000"
-volumes:
-  dbdata:
+      - "4000:4000"
+networks:
+  global:
+    name: global
