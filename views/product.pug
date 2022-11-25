@@ -1,0 +1,16 @@
+extends layout.pug
+
+block content
+    div(class='main py-12')
+        section(class='product-section container mx-auto flex justify-center gap-28')
+            div(class='product__image  w-[445px] h-[445px]')
+                img(src='https://picsum.photos/1920/1080', alt='product', class='rounded-xl h-full w-full object-cover')
+            div(class='product__info flex flex-col justify-center  w-[445px] h-[445px]')
+                div(class='product__info__mark')
+                    p(class='text-2xl text-orange uppercase font-bold text-xs mb-8') Sneaker Company
+                div(class='product__info__title')
+                    h1(class=' text-5xl font-bold mb-8') Fall Limited Edition Sneakers
+                div(class='product__info__description')
+                    p(class='text-gray mb-8') These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they'll withstand everything the weather can offer.
+                div(class='product__info__price')
+                    span(class='text-2xl font-bold') $125.00

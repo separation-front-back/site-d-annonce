@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: site-d-annonce-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: database
+    ports:
+      - "3333:3333"
+    volumes:
+      - dbdata:/var/lib/mysql
+  web:
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+volumes:
+  dbdata:

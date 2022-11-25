@@ -1,0 +1,15 @@
+extends layout.pug
+
+block content
+    div(class='main py-4')
+        section(class='product-form-section container mx-auto flex justify-center')
+            div(class='product-form shadow p-4')
+                form(action="")
+                    div(class="product-form-row")
+                        input(type="text", placeholder="Titre", class="product-form-input border-b-2 border-black border-solid", name="name")
+                    div(class="product-form-row")
+                        input(type="text", placeholder="Price", class="product-form-input  border-b-2 border-black border-solid", name="price") 
+                    div(class="product-form-row")
+                        textarea(type="text", placeholder="Votre description", class="product-form-input  border-b-2 border-black border-solid", name="description") 
+                    div(class="product-form-row")
+                        button(type="submit", class="product-form-button bg-orange") Créer l'annonce
