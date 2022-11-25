@@ -1,35 +1,26 @@
 import { Router } from 'express'
-import db from './db'
+import Product from './model/product'
 
 const router = Router()
 
-router.post('/api/product/create', (req, res) => {
-    console.log(req.body)
-
-    db('products')
-        .insert({
-            name: req.body.name,
-            price: req.body.price,
-            description: req.body.description,
-        })
-        .then(() => {
-            console.log('product created')
-        })
+router.post('/api/product/create', async (req, res) => {
+    const product = new Product()
+    product.name = req.body.name
+    product.price = req.body.price
+    product.description = req.body.description
+    await product.save()
+    res.send('Product has been created!')
 })
 router.get('/api/products', (req, res) => {
-    db('products').then((e) => {
-        if (e) res.send(e)
+    Product.find().then((products) => {
+        res.send(products)
     })
 })
-router.get('/api/product/test', (req, res) => {
-    db('products')
-        .insert({
-            name: 'alo',
-            price: 15,
-            description: 'desc alo',
-        })
-        .then(() => {
-            console.log('product created')
-        })
+router.get('/api/product/:id', (req, res) => {
+    Product.findOne({ where: { id: Number(req.params.id) } }).then(
+        (product) => {
+            res.send(product)
+        }
+    )
 })
 export default router

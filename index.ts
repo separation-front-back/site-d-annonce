@@ -2,10 +2,11 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import productRouter from './produit'
 import usersRouter from './user'
-import db from './db'
 import * as dotenv from 'dotenv'
 dotenv.config()
 import path from 'path'
+import Product from './model/product'
+import './db'
 
 const app = express()
 const port = process.env.SERVER_PORT || 8500
@@ -23,12 +24,8 @@ const server = http.listen(port, () => {
 })
 
 app.get('/', (req, res) => {
-    db('products').then((e) => {
-        if (e) {
-            res.render('index', { products: e })
-        } else {
-            res.render('index', { products: [] })
-        }
+    Product.find().then((products) => {
+        res.render('index', { products: products })
     })
 })
 
